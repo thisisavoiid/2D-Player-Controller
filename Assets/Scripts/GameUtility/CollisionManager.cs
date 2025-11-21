@@ -62,7 +62,7 @@ public class CollisionManager : MonoBehaviour
 
     }
 
-    public void HandlePlayerCollisionStay(Collision2D collision)
+    public void HandlePlayerCollisionStay(Collision2D collision, PlayerController controller)
     {
         switch (collision.collider.tag.ToLower())
         {
@@ -72,7 +72,7 @@ public class CollisionManager : MonoBehaviour
                     {
                         PlayerController._isGrounded = true;
                         PlayerController._hasJumpRemaining = true;
-                    }
+                        controller.ResetExtraJumps();                    }
                     break;
 
                 }

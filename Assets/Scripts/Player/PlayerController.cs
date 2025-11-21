@@ -14,10 +14,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _jumpHeight = 10;
     [SerializeField] private float _movementAccel = 50;
     [SerializeField] private float _playerDieAfterHeight = -10;
+    [SerializeField] private int _extraJumps = 1;
 
     public bool _canWallJump = true;
     public static bool _isGrounded { get; set; }
     public static bool _hasJumpRemaining { get; set; }
+    public static int ExtraJumpCounter { get; set; }
     public static bool _hasUsedWallJump { get; set; }
     public static bool _hasLevelFinished { get; set; }
 
@@ -41,7 +43,6 @@ public class PlayerController : MonoBehaviour
         _jump = _playerInput.PlayerMovement.Jump;
         _rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        DontDestroyOnLoad(this);
     }
 
 
@@ -50,6 +51,7 @@ public class PlayerController : MonoBehaviour
     {
         _playerInput.Enable();
         Spawn();
+
     }
 
     private void OnDisable()
@@ -60,7 +62,7 @@ public class PlayerController : MonoBehaviour
     // Collision detection
     private void OnCollisionStay2D(Collision2D collision)
     {
-        CollisionManager.Instance.HandlePlayerCollisionStay(collision);
+        CollisionManager.Instance.HandlePlayerCollisionStay(collision, this);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -124,9 +126,18 @@ public class PlayerController : MonoBehaviour
 
         if (_jump.WasPressedThisFrame())
         {
-            if (_isGrounded || _hasJumpRemaining)
+            if (_isGrounded)
             {
                 Jump();
+            }
+            else if (_hasJumpRemaining)
+            {
+                Jump();
+            }
+            else if (ExtraJumpCounter > 0)
+            {
+                Jump();
+                ExtraJumpCounter--;
             }
         }
 
@@ -150,6 +161,12 @@ public class PlayerController : MonoBehaviour
     {
         _hasLevelFinished = false;
         _rigidbody.transform.position = GameManager.Instance.GetLevelSpawnAnchorPosition();
+        
+    }
+
+    public void ResetExtraJumps()
+    {
+        ExtraJumpCounter = _extraJumps;
     }
 
     // Gizmos
