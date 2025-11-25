@@ -13,9 +13,15 @@ public class PlayerController : MonoBehaviour
     private GameManager _gameManager;
 
     // Player behaviour values
-    [SerializeField] public float _speed = 10;
+    [SerializeField] private float _speed = 10;
+    public float Speed => _speed;
+
     [SerializeField] private float _jumpHeight = 10;
+    public float JumpHeight => _jumpHeight;
+
     [SerializeField] private float _movementAccel = 50;
+    public float MovementAcceleration => _movementAccel;
+
     [SerializeField] private float _playerDieAfterHeight = -10;
 
     [SerializeField] private int _extraJumps = 1;
