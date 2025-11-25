@@ -300,7 +300,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.07
+  m_Mass: 0.08
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 3
@@ -377,6 +377,7 @@ MonoBehaviour:
   _jumpHeight: 10
   _movementAccel: 50
   _playerDieAfterHeight: -20
+  _extraJumps: 2
   _canWallJump: 1
   _animator: {fileID: 8031974930453450660}
   _soundPlayer: {fileID: 6243753311430812069}
