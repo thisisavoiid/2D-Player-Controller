@@ -25,11 +25,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     /// <summary>
-    /// Prefab reference for the player object.
-    /// </summary>
-    [SerializeField] public GameObject _playerPrefab;
-
-    /// <summary>
     /// Utility objects to instantiate in each scene (optional).
     /// </summary>
     [SerializeField] public List<GameObject> _sceneGameUtilityObjects = new List<GameObject>();

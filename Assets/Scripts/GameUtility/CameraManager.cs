@@ -14,6 +14,7 @@ public class CameraManager : MonoBehaviour
     public float CameraSmoothness = 7.0f;
 
     private Rigidbody2D _playerRigidBody;
+    private PlayerController _playerController;
 
     private Vector3 _currentplayerPosition;
     private Vector3 _currentCameraPosition;
@@ -25,7 +26,9 @@ public class CameraManager : MonoBehaviour
 
     public void RefreshReferences()
     {
-        _playerRigidBody = FindFirstObjectByType<PlayerController>().GetComponentInParent<Rigidbody2D>();
+        _playerController = FindFirstObjectByType<PlayerController>();
+        _playerRigidBody = _playerController.GetComponentInParent<Rigidbody2D>();
+
         Camera = GameManager.Instance.GetAllGameObjectsInScene(SceneManager.GetActiveScene().buildIndex).Where(obj => obj.gameObject.CompareTag("MainCamera")).First();
         Camera.GetComponent<Camera>().orthographicSize = 5;
     }

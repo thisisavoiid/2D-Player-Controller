@@ -377,8 +377,9 @@ MonoBehaviour:
   _jumpHeight: 10
   _movementAccel: 50
   _playerDieAfterHeight: -20
-  _extraJumps: 2
+  _extraJumps: 1
   _canWallJump: 1
+  _canDoubleJump: 1
   _animator: {fileID: 8031974930453450660}
   _soundPlayer: {fileID: 6243753311430812069}
 --- !u!1 &9124505061569288810

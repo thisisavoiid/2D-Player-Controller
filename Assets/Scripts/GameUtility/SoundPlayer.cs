@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
+using Random = UnityEngine.Random;
+
 
 public class SoundPlayer : MonoBehaviour
 {
@@ -31,6 +34,7 @@ public class SoundPlayer : MonoBehaviour
     /// List of audio resources assignable in the Inspector.
     /// </summary>
     [SerializeField] private List<soundSource> _audioResources;
+    [SerializeField] private float _randomPitchOffset = 0.04f;
 
     /// <summary>
     /// AudioSource component used to play sounds.
@@ -96,6 +100,7 @@ public class SoundPlayer : MonoBehaviour
     /// <returns>IEnumerator for coroutine.</returns>
     IEnumerator PlaySoundUntilDone(AudioClip sound)
     {
+        _audioSource.pitch = Random.Range(1.0f-_randomPitchOffset, 1.0f+_randomPitchOffset);
         _audioSource.PlayOneShot(sound);
 
         // Wait for the sound's length
